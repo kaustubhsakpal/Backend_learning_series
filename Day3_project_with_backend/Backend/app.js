@@ -1,8 +1,8 @@
 const { urlencoded } = require('body-parser');
 const express = require('express')
 const multer =require('multer')
-const uplodfile = require('./services/storage.service')
-const postmodel =require('./models/post.model')
+const uplodfile = require('./src/services/storage.service')
+const postmodel =require('./src/models/post.model')
 const cors =require('cors')
 const app =express();
 

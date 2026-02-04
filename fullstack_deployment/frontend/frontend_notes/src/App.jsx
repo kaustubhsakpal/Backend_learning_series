@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios, { formToJSON } from "axios";
+import axios from "axios";
 function App() {
   const [notes, Setnotes] = useState([]);
-  const [editid,setEditId] =useState('');
+  const [editid,setEditId] =useState(null);
   const [description,setEditdescription]=useState('');
   
   async function apicall() {
-    await axios.get("http://localhost:3000/post").then((res) => {
+        await axios.get(import.meta.env.VITE_BACKEND_URL+"/post").then((res) => {
       Setnotes(res.data.notes);
     });
   }
@@ -18,26 +18,22 @@ function App() {
     const title = formdata.get("title");
     const description = formdata.get("description");
 
-    await axios.post("http://localhost:3000/post", {
+    await axios.post(import.meta.env.VITE_BACKEND_URL+"/post", {
       title,
       description,
     });
-
-    title=''
-    description=''
-
     apicall();
   }
 
   async function deletehandler(id) {
 
-    await axios.delete("http://localhost:3000/post/"+id)
+    await axios.delete(import.meta.env.VITE_BACKEND_URL+"/post/"+id)
     apicall()
   }
 
   async function updatehandler(id){
    
-   await  axios.patch('http://localhost:3000/post/'+id,{
+   await  axios.patch(import.meta.env.VITE_BACKEND_URL+"/post/"+id,{
           description: description
     })
     setEditId(null)
