@@ -15,7 +15,8 @@ const user = mongoose.Schema({
         type:String,
         required:true,
         unique:[true,"your username allready exits"]
-    }
+    },
+
 })
 
 const usermodel = mongoose.model("users",user);
